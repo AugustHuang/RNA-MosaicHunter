@@ -1,0 +1,2 @@
+resources/dbsnp_137.b37.raw.tsv.gz filter=lfs diff=lfs merge=lfs -text
+resources/human_v37_contig_hg19_hs37d5.fasta.gz filter=lfs diff=lfs merge=lfs -text
