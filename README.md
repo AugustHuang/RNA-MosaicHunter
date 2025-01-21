@@ -64,7 +64,7 @@ samtools index rnaseq/bam_ready/${IND_NAME}_${SAMPLE_ID}.final.bam
 ```
   
 ## 4. Example data for RNA-MosaicHunter Input
-{Path to example data}
+resources/example.bam
 
 ## 5. Run RNA-MosaicHunter
 ### 5.1 RNA-MosaicHunter
