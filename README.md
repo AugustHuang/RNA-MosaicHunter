@@ -92,7 +92,7 @@ Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv full-removal ${OUT
 2. **filter-based-removal**: removes RNA editing sites reported in DARNED [1] and REDIportal [2], and A>G mutations on transcribed strand and T>C mutations on untranscribed strand  
 
 ```
-Rscript RNA_Editing_Filter_MH.R final.clean.tsv filter-based-removal final.clean.filter_RNA_edit.tsv
+Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv filter-based-removal ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
 ```
 
 ## 6. Output format
