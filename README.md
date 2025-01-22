@@ -57,6 +57,7 @@ java -jar GenomeAnalysisTK.jar -T PrintReads -nct ${THREAD_NUM} -R ${REFERENCE_D
 samtools view -f 2 -F 768 -h rnaseq/GATK/${IND_NAME}_${SAMPLE_ID}.BQSR.bam | samtools view -Sb - > rnaseq/bam_ready/${IND_NAME}_${SAMPLE_ID}.final.bam
 samtools index rnaseq/bam_ready/${IND_NAME}_${SAMPLE_ID}.final.bam
 ```
+${IND_NAME}_${SAMPLE_ID}.final.bam could be used as the input for Step 5 Run RNA-MosaicHunter.
 
 ### 3.7 Calculate coverage -- Bedtools (not necessary)
 ```
