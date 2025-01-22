@@ -223,6 +223,11 @@ Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv full-removal ${OUT
 Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv filter-based-removal ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
 ```
 
+Example output file final.clean.filter_RNA_edit.tsv:
+```
+4	6064082	TRUE	122	TATTTTTTTTTTTTTTATTTTttttttttttttttttttttttttttttttttTTtttttTTTAttTttttatttttTTTTTAtTttTTTTTTAtTtatttttTtttttatatttttTttTt	BDCACBCBBBBCBBBBCBBBBCBCCCCCCCBCCCCDCCCDCCCBCCACCCCACBBCCCCCCBBCCCBCCC>BCCA>CACBCCDDBCDBBBBBBCDADBDDDDDBECDDDBABDDDDD=DDCH	TRUE	113	A	9	T(1.0):A(N/A-9e-05	-3.69906	-8.00009	-7	-30.42197	-36.72566	-380.90166	-15.17676	-8.2453	-18.24796	-366.72499	0	1
+```
+
 ## 6. Output format
 
 All of the output files are in the specified directory output_dir, including the final candidate list final.passed.tsv, the filtered and remained remaining variant lists of each filters (.filtered.tsv, .passed.tsv), and other temporary files, such as blat input and output.
