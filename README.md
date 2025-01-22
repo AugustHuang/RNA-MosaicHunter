@@ -65,12 +65,16 @@ ${IND_NAME}_${SAMPLE_ID}.final.bam could be used as the input for Step 5 Run RNA
 ```
   
 ## 4. Example data for RNA-MosaicHunter Input
-resources/example.bam (generated based on sequence around GTEX-111FC (sSNV chr4:6064082))
+resources/example.bam (generated based on sequence around GTEX-111FC (sSNV chr4:6064082)). Need preprocessing including sorting and indexing.
+```
+samtools sort example.bam example_srt
+samtools index example_srt.bam
+```
 
 ## 5. Run RNA-MosaicHunter
 ### 5.1 RNA-MosaicHunter
 ```
-java -Xmx64G -jar ${MOSAICHUNTER_DIR}/build/mosaichunter.jar -C ${MOSAICHUNTER_CONFIG} -P input_file=resources/example.bam -P mosaic_filter.sex=${SEX} -P output_dir=${OUTPUT_DIR} -P common_site_filter.bed_file=${ERROR_PRONE_BED} -P misaligned_reads_filter.max_NM=3
+java -Xmx64G -jar ${MOSAICHUNTER_DIR}/build/mosaichunter.jar -C ${MOSAICHUNTER_CONFIG} -P input_file=${PATH}/example_srt.bam -P mosaic_filter.sex=${SEX} -P output_dir=${OUTPUT_DIR} -P common_site_filter.bed_file=${ERROR_PRONE_BED} -P misaligned_reads_filter.max_NM=3
 
 cat ${OUTPUT_DIR}/final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~"1.0"' > ${OUTPUT_DIR}/final.clean.tsv
 ```
