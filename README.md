@@ -78,7 +78,7 @@ java -Xmx64G -jar ${MOSAICHUNTER_DIR}/build/mosaichunter.jar -C ${MOSAICHUNTER_C
 
 cat ${OUTPUT_DIR}/final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~"1.0"' > ${OUTPUT_DIR}/final.clean.tsv
 ```
-Example Output:
+Example Output of RNA-MosaicHunter:
 ```
 base_quality = 33
 chr_x_name = X
