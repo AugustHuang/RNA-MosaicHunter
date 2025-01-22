@@ -1,18 +1,5 @@
 #!/usr/bin/env Rscript
 
-# Function to check if a package is installed and install it if not
-check_and_install <- function(pkg) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    print(paste('Installing',pkg))
-    install.packages(pkg, repos = "http://cran.us.r-project.org")
-  }
-}
-
-# List of required packages
-required_packages <- c("tidyverse", "TxDb.Hsapiens.UCSC.hg19.knownGene")
-# Install missing packages
-lapply(required_packages, check_and_install)
-
 # Suppress warnings when loading libraries
 library(tidyverse) # v2.0.0
 library(TxDb.Hsapiens.UCSC.hg19.knownGene) #v3.2.2
