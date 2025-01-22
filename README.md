@@ -64,14 +64,14 @@ samtools index rnaseq/bam_ready/${IND_NAME}_${SAMPLE_ID}.final.bam
 ```
   
 ## 4. Example data for RNA-MosaicHunter Input
-resources/example.bam
+resources/example.bam (generated based on sequence around GTEX-111FC (sSNV chr4:6064082))
 
 ## 5. Run RNA-MosaicHunter
 ### 5.1 RNA-MosaicHunter
 ```
-java -Xmx64G -jar ${MOSAICHUNTER_DIR}/build/mosaichunter.jar -C ${MOSAICHUNTER_CONFIG} -P input_file=rnaseq/bam_ready/${IND_NAME}_${SAMPLE_ID}.final.bam -P mosaic_filter.sex=${SEX} -P output_dir=${OUTPUT_DIR} -P common_site_filter.bed_file=${ERROR_PRONE_BED} -P misaligned_reads_filter.max_NM=3
+java -Xmx64G -jar ${MOSAICHUNTER_DIR}/build/mosaichunter.jar -C ${MOSAICHUNTER_CONFIG} -P input_file=resources/example.bam -P mosaic_filter.sex=${SEX} -P output_dir=${OUTPUT_DIR} -P common_site_filter.bed_file=${ERROR_PRONE_BED} -P misaligned_reads_filter.max_NM=3
 
-cat rnaseq/MosaicHunter/${IND_NAME}/${SAMPLE_ID}/final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~"1.0"' > rnaseq/MosaicHunter/${IND_NAME}/${SAMPLE_ID}/final.clean.tsv
+cat ${OUTPUT_DIR}/final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~"1.0"' > ${OUTPUT_DIR}/final.clean.tsv
 ```
 
 
@@ -81,7 +81,7 @@ We have two different mode of RNA editint filters:
 1. **full-removal**: removes all A>G / T>C mutations  
 
 ```
-Rscript RNA_Editing_Filter_MH.R final.clean.tsv full-removal final.clean.filter_RNA_edit.tsv
+Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv full-removal ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
 ```
 
 2. **filter-based-removal**: removes RNA editing sites reported in DARNED [1] and REDIportal [2], and A>G mutations on transcribed strand and T>C mutations on untranscribed strand  
