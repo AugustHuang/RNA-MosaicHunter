@@ -78,7 +78,135 @@ java -Xmx64G -jar ${MOSAICHUNTER_DIR}/build/mosaichunter.jar -C ${MOSAICHUNTER_C
 
 cat ${OUTPUT_DIR}/final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~"1.0"' > ${OUTPUT_DIR}/final.clean.tsv
 ```
-
+Example Output:
+```
+base_quality = 33
+chr_x_name = X
+chr_y_name = Y
+depth_sampling = true
+enable_reference_cache = false
+in_process_filter_name = in_process_filter
+input_file = test_0122s_srt.bam
+input_sampling = false
+input_sampling_regions = 1
+input_sampling_size = 1
+max_depth = 5001
+max_recent_reads = 9997
+min_mapping_quality = 20
+min_read_quality = 20
+output_dir = tmp_0122
+post_process_filter_name = post_process_filter
+read_buffer_size = 100000
+reference_file = /home/yh174/reference/human_v37/human_g1k_v37.fasta
+remove_duplicates = true
+remove_flags = 0x100
+seed = 0
+valid_references = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,X,Y
+base_number_filter.class = cn.edu.pku.cbi.mosaichunter.filter.BaseNumberFilter
+base_number_filter.min_minor_allele_number = 5
+base_number_filter.min_minor_allele_percentage = 5
+base_number_filter.omit_alt_homozygous = false
+base_number_filter.output_passed = true
+common_site_filter.bed_file = /home/yh174/reference/error_prone_bed/FSJ-M_XHX-F_ACC1-blood_PE.overlap.singularAF.bed
+complete_linkage_filter.binom_error_rate = 1e-3
+complete_linkage_filter.binom_p_value_cutoff = 0.01
+complete_linkage_filter.class = cn.edu.pku.cbi.mosaichunter.filter.CompleteLinkageFilter
+complete_linkage_filter.fisher_p_value_cutoff = 0.01
+complete_linkage_filter.output_filtered = true
+complete_linkage_filter.output_passed = true
+depth_filter.class = cn.edu.pku.cbi.mosaichunter.filter.DepthFilter
+depth_filter.max_depth = 500000
+depth_filter.min_depth = 10
+depth_filter.output_filtered = false
+depth_filter.output_passed = false
+final.class = cn.edu.pku.cbi.mosaichunter.filter.OutputFilter
+final.data_name = mosaic_filter
+final.output_passed = true
+homopolymers_filter.class = cn.edu.pku.cbi.mosaichunter.filter.HomopolymersFilter
+homopolymers_filter.long_homopolymer_expansion = 3
+homopolymers_filter.long_homopolymer_length = 6
+homopolymers_filter.output_filtered = true
+homopolymers_filter.output_passed = true
+homopolymers_filter.short_homopolymer_expansion = 2
+homopolymers_filter.short_homopolymer_length = 4
+in_process_filter.class = cn.edu.pku.cbi.mosaichunter.filter.AndFilter
+in_process_filter.filters = depth_filter,base_number_filter,repetitive_region_filter,homopolymers_filter,strand_bias_filter,mapping_quality_filter,within_read_position_filter,mosaic_filter,complete_linkage_filter
+mapping_quality_filter.class = cn.edu.pku.cbi.mosaichunter.filter.MappingQualityFilter
+mapping_quality_filter.output_filtered = true
+mapping_quality_filter.output_passed = true
+mapping_quality_filter.p_value_cutoff = 0.05
+misaligned_reads_filter.blat_param = -stepSize=5 -repMatch=2253 -minScore=0 -minIdentity=0.5 -noHead
+misaligned_reads_filter.blat_path = 
+misaligned_reads_filter.class = cn.edu.pku.cbi.mosaichunter.filter.MisalignedReadsFilter
+misaligned_reads_filter.max_NM = 3
+misaligned_reads_filter.min_gap_distance = 5
+misaligned_reads_filter.min_overlap_percentage = 0.9
+misaligned_reads_filter.min_side_distance = 5
+misaligned_reads_filter.misalignment_threshold = 0.5
+misaligned_reads_filter.omit_multiple_alignment = false
+misaligned_reads_filter.output_filtered = true
+misaligned_reads_filter.output_passed = true
+misaligned_reads_filter.reference_file = /home/yh174/reference/human_v37_contig_hg19_hs37d5.fasta
+mosaic_filter.alpha_param = 0
+mosaic_filter.base_change_rate = 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+mosaic_filter.beta_param = 0
+mosaic_filter.class = cn.edu.pku.cbi.mosaichunter.filter.MosaicFilter
+mosaic_filter.control_bam_file = 
+mosaic_filter.dbsnp_file = /home/yh174/reference/dbsnp_137.b37.raw.tsv
+mosaic_filter.de_novo_rate = 1e-8
+mosaic_filter.father_bam_file = 
+mosaic_filter.fisher_threshold = 0.01                   
+mosaic_filter.mode = RNA
+mosaic_filter.mosaic_rate = 1e-7
+mosaic_filter.mosaic_threshold = 0.05
+mosaic_filter.mother_bam_file = 
+mosaic_filter.novel_af = 1e-4
+mosaic_filter.omit_alt_homozygous = false
+mosaic_filter.output_filtered = true
+mosaic_filter.output_passed = true
+mosaic_filter.sex = M
+mosaic_filter.unknown_af = 0.002
+null_filter.class = cn.edu.pku.cbi.mosaichunter.filter.NullFilter
+null_filter.output_filtered = true
+null_filter.output_passed = true
+null_filter.return_value = false
+post_process_filter.class = cn.edu.pku.cbi.mosaichunter.filter.AndFilter
+post_process_filter.filters = misaligned_reads_filter,final
+repetitive_region_filter.bed_file = /home/yh174/reference/repeats/all_repeats.b37.bed
+repetitive_region_filter.class = cn.edu.pku.cbi.mosaichunter.filter.RegionFilter
+repetitive_region_filter.include = false
+repetitive_region_filter.output_filtered = true
+repetitive_region_filter.output_passed = true
+stats_manager.enable_counter = false
+stats_manager.enable_timer = false
+strand_bias_filter.class = cn.edu.pku.cbi.mosaichunter.filter.StrandBiasFilter
+strand_bias_filter.output_filtered = true
+strand_bias_filter.output_passed = true
+strand_bias_filter.p_value_cutoff = 0.05
+within_read_position_filter.class = cn.edu.pku.cbi.mosaichunter.filter.WithinReadPositionFilter
+within_read_position_filter.output_filtered = true
+within_read_position_filter.output_passed = true
+within_read_position_filter.p_value_cutoff = 0.05
+Wed Jan 22 01:19:49 EST 2025 Initializing...
+Wed Jan 22 01:19:51 EST 2025 Reading reference from file: /home/yh174/reference/human_v37/human_g1k_v37.fasta
+Wed Jan 22 01:20:25 EST 2025 Initializing filters...
+Wed Jan 22 01:20:29 EST 2025 Scanning...
+Wed Jan 22 01:20:29 EST 2025 - Time(s):0 Reads:0 Sites:0/3095677412 Progress:0.00%
+Wed Jan 22 01:20:40 EST 2025 - Time(s):10 Reads:127 Sites:3095677412/3095677412 Progress:100.00%
+run blat: blat -stepSize=5 -repMatch=2253 -minScore=0 -minIdentity=0.5 -noHead /home/yh174/reference/human_v37_contig_hg19_hs37d5.fasta tmp_0122/misaligned_reads_filter.fa tmp_0122/misaligned_reads_filter.psl
+filter name                                          pass/all   ratio
+depth_filter                                          111/144  77.08%
+base_number_filter                                      1/111   0.90%
+repetitive_region_filter                                  1/1 100.00%
+homopolymers_filter                                       1/1 100.00%
+strand_bias_filter                                        1/1 100.00%
+mapping_quality_filter                                    1/1 100.00%
+within_read_position_filter                               1/1 100.00%
+mosaic_filter                                             1/1 100.00%
+complete_linkage_filter                                   1/1 100.00%
+misaligned_reads_filter                                   1/1 100.00%
+final                                                     1/1 100.00%
+```
 
 
 ### 5.2 RNA-editing filter
