@@ -61,6 +61,7 @@ java -Xmx64G -jar ${MOSAICHUNTER_DIR}/build/mosaichunter.jar -C ${MOSAICHUNTER_C
 ```
 
 You can modify RNA-MosaicHunter parameters either by editing the ${MOSAICHUNTER_CONFIG} file or by adding -P ${PARAMETER_NAME}=${PARAMETER_VALUE} to the command line.
+Default version of ${MOSAICHUNTER_CONFIG} based on GRCh37 is provided under `/conf`.
 
 ### 4.2 Remove sites where the top two alleles are both non-reference or those present in dbSNP (optional)
 ```
