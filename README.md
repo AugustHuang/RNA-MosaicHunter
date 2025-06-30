@@ -10,13 +10,13 @@
 - BEDTools 2.26.0
 
 ## 2. Prepare reference
-RNA-MosaicHunter requires a fasta file (.fasta, .fa) for your reference genome. It is better to make sure that your reference file has the same name and order of contigs to your .bam file(s) and .bed file(s). Reads aligned to any contigs which do not appear in the reference file will be ignored. When running RNA-MosaicHunter, you need to set the top parameter reference_file.
+RNA-MosaicHunter requires a `fasta` file (.fasta, .fa) for your reference genome. It is better to make sure that your reference file has the same name and order of contigs to your `.bam` file(s) and `.bed` file(s). Reads aligned to any contigs that do not appear in the reference file will be ignored. When running RNA-MosaicHunter, you need to set the top parameter reference_file.
 
 ## 3. Prepare data for RNA-MosaicHunter input
 
 RNA-MosaicHunter currently accepts aligned reads from RNA sequencing (RNA-seq). We recommend STAR for read mapping and GATK/Picard for read pre-processing. These pre-processing steps are important in order to reduce false positives in identifying mosaic sites. The following is an example of how the reads are pre-processed.  
   
-Note that default config file and resources files are designed for GRCh37 (hg19). To run on other versions (e.g. GRCh38), users should prepare hg38 reference files and change the parameters "valid_references", "chr_x_name", "chr_y_name" in the config file to the corresponding chromosome names (e.g. with "chr" for GRCh38).  
+Note that default config file and resources files are designed for GRCh37 (hg19). To run on other versions (e.g. GRCh38), users should prepare hg38 reference files and change the parameters `valid_references`, `chr_x_name`, `chr_y_name` in the config file to the corresponding chromosome names (e.g. with "chr" for GRCh38).  
 
 ### 3.1 Read alignment -- STAR
 ```
@@ -52,7 +52,7 @@ java -jar GenomeAnalysisTK.jar -T PrintReads -nct ${THREAD_NUM} -R ${REFERENCE_D
 samtools view -f 2 -F 768 -h rnaseq/GATK/${IND_NAME}_${SAMPLE_ID}.BQSR.bam | samtools view -Sb - > rnaseq/bam_ready/${IND_NAME}_${SAMPLE_ID}.final.bam
 samtools index rnaseq/bam_ready/${IND_NAME}_${SAMPLE_ID}.final.bam
 ```
-${IND_NAME}_${SAMPLE_ID}.final.bam could be used as the input for Step 4 Run RNA-MosaicHunter.
+`${IND_NAME}_${SAMPLE_ID}.final.bam` could be used as the input for Step 4 Run RNA-MosaicHunter.
 
 ## 4. Run RNA-MosaicHunter
 ### 4.1 RNA-MosaicHunter
@@ -60,8 +60,8 @@ ${IND_NAME}_${SAMPLE_ID}.final.bam could be used as the input for Step 4 Run RNA
 java -Xmx64G -jar ${MOSAICHUNTER_DIR}/build/mosaichunter.jar -C ${MOSAICHUNTER_CONFIG} -P input_file=${PATH}/example_srt.bam -P mosaic_filter.sex=${SEX} -P output_dir=${OUTPUT_DIR}
 ```
 
-You can modify RNA-MosaicHunter parameters either by editing the ${MOSAICHUNTER_CONFIG} file or by adding -P ${PARAMETER_NAME}=${PARAMETER_VALUE} to the command line.
-Default version of ${MOSAICHUNTER_CONFIG} based on GRCh37 is provided under `/conf`.
+You can modify RNA-MosaicHunter parameters either by editing the `${MOSAICHUNTER_CONFIG}` file or by adding `-P ${PARAMETER_NAME}=${PARAMETER_VALUE}` to the command line.
+Default version of `${MOSAICHUNTER_CONFIG}` based on GRCh37 is provided under `/conf`.
 
 ### 4.2 Remove sites where the top two alleles are both non-reference or those present in dbSNP (optional)
 ```
@@ -84,7 +84,7 @@ Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv filter-based-remov
 
 ## 5. Output format
 
-All of the output files are in the specified directory ${OUTPUT_DIR}, including the final mosaic candidate list final.clean.filter_RNA_edit.tsv, the filtered and remained remaining variant lists of each filters (.filtered.tsv, .passed.tsv), and other temporary files, such as blat input and output.
+All of the output files are in the specified directory ${OUTPUT_DIR}, including the final mosaic candidate list `final.clean.filter_RNA_edit.tsv`, the filtered and remained remaining variant lists of each filters (`.filtered.tsv`, `.passed.tsv`), and other temporary files, such as blat input and output.
 
 
 The final.clean.filter_RNA_edit.tsv files are in tab-separated format, with column meanings detailed below:  
@@ -117,7 +117,7 @@ The final.clean.filter_RNA_edit.tsv files are in tab-separated format, with colu
 You can get a high-confidence candidate list of mosaic sites by filtering the 24th column (mosaic posterior probability) or sorting this column from high to low.
   
 ## 6. Demo
-The example input of RNA-MosaicHunter can be found at resources/example.bam:
+The example input of RNA-MosaicHunter can be found at `resources/example.bam`:
 ```
 samtools sort example.bam example_srt
 samtools index example_srt.bam
@@ -126,7 +126,7 @@ cat final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~"1.0"' > final
 Rscript RNA_Editing_Filter_MH.R final.clean.tsv filter-based-removal final.clean.filter_RNA_edit.tsv
 ```
 
-The expected output of RNA-MosaicHunter (final.clean.filter_RNA_edit.tsv):
+The expected output of RNA-MosaicHunter (`final.clean.filter_RNA_edit.tsv`):
 ```
 4	6064082	TRUE	122	TATTTTTTTTTTTTTTATTTTttttttttttttttttttttttttttttttttTTtttttTTTAttTttttatttttTTTTTAtTttTTTTTTAtTtatttttTtttttatatttttTttTt	BDCACBCBBBBCBBBBCBBBBCBCCCCCCCBCCCCDCCCDCCCBCCACCCCACBBCCCCCCBBCCCBCCC>BCCA>CACBCCDDBCDBBBBBBCDADBDDDDDBECDDDBABDDDDD=DDCH	TRUE	113	A	9	T(1.0):A(N/A-9e-05	-3.69906	-8.00009	-7	-30.42197	-36.72566	-380.90166	-15.17676	-8.2453	-18.24796	-366.72499	0	1
 ```
