@@ -7,7 +7,7 @@
 - Picard 1.138
 - GATK 3.6
 - SAMtools 0.1.19
-- BEDTools 2.23.0
+- BEDTools 2.26.0
 
 ## 2. Prepare reference
 RNA-MosaicHunter requires a fasta file (.fasta, .fa) for your reference genome. It is better to make sure that your reference file has the same name and order of contigs to your .bam file(s) and .bed file(s). Reads aligned to any contigs which do not appear in the reference file will be ignored. When running RNA-MosaicHunter, you need to set the top parameter reference_file.
