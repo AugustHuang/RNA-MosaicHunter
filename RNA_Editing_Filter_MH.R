@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 ### updated on 2025.09.16
-### Author: Yuchen (Alana) Cheng
+### By: Yuchen (Alana) Cheng
 
 # Suppress warnings when loading libraries
 library(tidyverse) # v2.0.0
