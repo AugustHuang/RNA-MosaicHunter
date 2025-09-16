@@ -73,13 +73,13 @@ cat ${OUTPUT_DIR}/final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~
 1. **full-removal**: removes all A>G / T>C mutations  
 
 ```
-Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv full-removal ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
+Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv full-removal remove ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
 ```
 
 2. **filter-based-removal**: removes RNA editing sites reported in DARNED [1] and REDIportal [2], and A>G mutations on transcribed strand and T>C mutations on untranscribed strand  
 
 ```
-Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv filter-based-removal ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
+Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv filter-based-removal remove ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
 ```
 #### 4.3.2 We provide options to remove or flag potential RNA editing sites
 
@@ -124,6 +124,7 @@ The final.clean.filter_RNA_edit.tsv files are in tab-separated format, with colu
 22. log10 posterior probability of minor-homozygous genotype
 23. log10 posterior probability of mosaic genotype
 24. Mosaic posterior probability
+25. RNA_EDITING_FLAG (shown under flag mode)
 
 You can get a high-confidence candidate list of mosaic sites by filtering the 24th column (mosaic posterior probability) or sorting this column from high to low.
   
