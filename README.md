@@ -69,7 +69,7 @@ cat ${OUTPUT_DIR}/final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~
 ```
 
 ### 4.3 RNA-editing filter
-We have two different mode of RNA editint filters:
+#### 4.3.1 We have two different mode of RNA editint filters:
 1. **full-removal**: removes all A>G / T>C mutations  
 
 ```
@@ -80,6 +80,17 @@ Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv full-removal ${OUT
 
 ```
 Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv filter-based-removal ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
+```
+#### 4.3.2 We provide options to remove or flag potential RNA editing sites
+
+1. Remove RNA editing sites (by default)
+```
+Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv filter-based-removal remove ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
+```
+
+2. Flag RNA editing sites: we add an additional column ${RNA_EDITING_FLAG}, Yes for potential RNA editing sites, No for confident somatic variant calls. 
+```
+Rscript RNA_Editing_Filter_MH.R ${OUTPUT_DIR}/final.clean.tsv filter-based-removal flag ${OUTPUT_DIR}/final.clean.filter_RNA_edit.tsv
 ```
 
 ## 5. Output format
@@ -123,7 +134,7 @@ samtools sort example.bam example_srt
 samtools index example_srt.bam
 java -Xmx64G -jar build/mosaichunter.jar -C conf/RNA.properties -P input_file=example_srt.bam -P mosaic_filter.sex=F -P output_dir=. -P misaligned_reads_filter.max_NM=3
 cat final.passed.tsv | awk '$3==$7||$3==$9' | awk '$11~"N/A"&&$11~"1.0"' > final.clean.tsv
-Rscript RNA_Editing_Filter_MH.R final.clean.tsv filter-based-removal final.clean.filter_RNA_edit.tsv
+Rscript RNA_Editing_Filter_MH.R final.clean.tsv filter-based-removal remove final.clean.filter_RNA_edit.tsv
 ```
 
 The expected output of RNA-MosaicHunter (`final.clean.filter_RNA_edit.tsv`):
